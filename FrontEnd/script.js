@@ -3,15 +3,16 @@
 // On cible la div qui contient les projets
 const gallery = document.querySelector('.gallery');
 
-fetch('http://localhost:5678/api/works')
-  .then(response => {
+async function loadGallery() {
+  try {
+    const response = await fetch('http://localhost:5678/api/works');
+
     if (!response.ok) {
       throw new Error('Erreur lors de la récupération des projets');
     }
-    return response.json();
-  })
-  .then(works => {
-    gallery.innerHTML = ''; // Vide la galerie avant insertion
+
+    const works = await response.json();
+    gallery.innerHTML = '';
 
     works.forEach(work => {
       const figure = document.createElement('figure');
@@ -27,5 +28,18 @@ fetch('http://localhost:5678/api/works')
       figure.appendChild(caption);
       gallery.appendChild(figure);
     });
-  })
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Appel de la fonction au chargement
+loadGallery();
+
+
+  const categorie= projets.map(article=> article.category.name)
+  
+  
+  
   

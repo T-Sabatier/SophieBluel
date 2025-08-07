@@ -1,19 +1,21 @@
 // On cible la div qui contient les projets
 const gallery = document.querySelector('.gallery');
+//Affiche les projets dans la gallerie
  function afficherGallerie(works){
+  //Vide la gallerie (pour les filtres
       gallery.innerText="";
-      
+//Parcours les projets de works
     works.forEach(work => {
-      const figure = document.createElement('figure');
+      const figure = document.createElement('figure'); //Creer la balise 
 
-      const img = document.createElement('img');
-      img.src = work.imageUrl;
-      img.alt = work.title;
+      const img = document.createElement('img'); // Creer la balise
+      img.src = work.imageUrl; //Lien vers img
+      img.alt = work.title; //Lien vers le titre
 
-      const caption = document.createElement('figcaption');
-      caption.innerText = work.title;
+      const caption = document.createElement('figcaption'); //Création le titre du projet
+      caption.innerText = work.title; //Titre affiché sous l'img
 
-      figure.appendChild(img);
+      figure.appendChild(img); 
       figure.appendChild(caption);
       gallery.appendChild(figure);
     });

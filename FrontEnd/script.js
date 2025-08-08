@@ -70,7 +70,28 @@ async function loadGallery() {
   }
 }
   
-
-
 // Appel de la fonction au chargement
 loadGallery();
+
+/*Recuperation du token
+function getToken(){
+token = localStorage.getItem("token");
+console.log(token)
+}*/
+
+const login = document.querySelector("#login");
+const token = localStorage.getItem("token");
+
+if (token) {
+  // Utilisateur connecté → on transforme en "Logout"
+  login.textContent = "Logout"; 
+  login.addEventListener("click", (event) => {  //Click sur logout
+    event.preventDefault();
+    localStorage.removeItem("token"); // Supprime le token du localstorage
+    window.location.reload();         // Recharge la page 
+  });
+} else {
+  // Utilisateur non connecté  on garde "Login"
+  login.textContent = "Login";
+  login.href = "login.html";
+}

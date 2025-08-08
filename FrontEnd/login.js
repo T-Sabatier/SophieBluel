@@ -23,11 +23,14 @@ method: "POST",
   })
   .then(resultat => {
     console.log("Réponse API :", resultat);
-  localStorage.setItem("token", resultat.token);
+  localStorage.setItem("token", resultat.token); // stock le token 
+  window.location.href = "index.html"; //Renvoi vers la page index 
 
   })
   .catch(error => {
-    console.error("Erreur attrapée :", error);
-    
-  });
+    const msgError=document.querySelector("#messageErreur");
+    msgError.innerText="Combinaison email/mot passe incorrect"
+    console.log("erreur")
+  
+  })
 });

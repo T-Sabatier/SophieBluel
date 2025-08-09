@@ -21,6 +21,7 @@ const gallery = document.querySelector('.gallery');
     });
 
   }
+  //Fonction chargement gallerie
 async function loadGallery() {
   try {
     const response = await fetch('http://localhost:5678/api/works');
@@ -42,6 +43,8 @@ async function loadGallery() {
     console.log(categorieUnique);
 
     //Cible le conteneur html (filtres)
+    const btnModified=document.querySelector(".btnModified") 
+    btnModified.style.display="none"; //Supprime "modifier"
     const filtres=document.querySelector(".filtres")
     const btnAll=document.createElement('button')
     btnAll.textContent="Tous";
@@ -79,19 +82,3 @@ token = localStorage.getItem("token");
 console.log(token)
 }*/
 
-const login = document.querySelector("#login");
-const token = localStorage.getItem("token");
-
-if (token) {
-  // Utilisateur connecté → on transforme en "Logout"
-  login.textContent = "Logout"; 
-  login.addEventListener("click", (event) => {  //Click sur logout
-    event.preventDefault();
-    localStorage.removeItem("token"); // Supprime le token du localstorage
-    window.location.reload();         // Recharge la page 
-  });
-} else {
-  // Utilisateur non connecté  on garde "Login"
-  login.textContent = "Login";
-  login.href = "login.html";
-}

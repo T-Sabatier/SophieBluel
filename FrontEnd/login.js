@@ -31,6 +31,16 @@ method: "POST",
     const msgError=document.querySelector("#messageErreur");
     msgError.innerText="Combinaison email/mot passe incorrect"
     console.log("erreur")
-  
   })
+
+  //Appel du script admin.js
+  const token = localStorage.getItem(token)
+  if (token) {
+    const script = document.createElement("script")
+    script.src="admin.js";
+    script.defer =true
+    document.head.appendChild(script);
+    
+  }
+  
 });

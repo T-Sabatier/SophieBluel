@@ -1,10 +1,9 @@
 function modified() {
 const login = document.querySelector("#login");
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 const filtres = document.querySelector(".filtres");
 const btnModified = document.querySelector(".btnModified");
 const modeEdit = document.querySelector(".modeEdit");
-
 //Gestion de la deconnexion et de l'apparence du login/logout
 if (token) {
   // Utilisateur connecté → on transforme en "Logout"
@@ -14,7 +13,7 @@ if (token) {
   };
   login.addEventListener("click", (event) => {  //Click sur logout
     event.preventDefault();
-    localStorage.removeItem("token");// Supprime le token du localstorage
+    sessionStorage.removeItem("token");// Supprime le token du localstorage
     window.location.reload();         // Recharge la page 
   });
 } else {

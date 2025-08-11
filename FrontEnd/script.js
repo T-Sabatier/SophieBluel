@@ -32,7 +32,6 @@ async function loadGallery() {
 
     const works = await response.json();
     gallery.innerHTML = '';
-
     // Gestion des filtres
     //Recuperation des categories
     const categorie= works.map(article=> article.category.name)

@@ -23,7 +23,7 @@ method: "POST",
   })
   .then(resultat => {
     console.log("Réponse API :", resultat);
-  localStorage.setItem("token", resultat.token); // stock le token 
+  sessionStorage.setItem("token", resultat.token); // stock le token 
   window.location.href = "index.html"; //Renvoi vers la page index 
 
   })
@@ -34,7 +34,7 @@ method: "POST",
   })
 
   //Appel du script admin.js
-  const token = localStorage.getItem(token)
+  const token = sessionStorage.getItem(token)
   if (token) {
     const script = document.createElement("script")
     script.src="admin.js";

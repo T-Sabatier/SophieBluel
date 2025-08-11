@@ -43,12 +43,19 @@ async function loadGallery() {
     console.log(categorieUnique);
 
     //Cible le conteneur html (filtres)
+    // Ajout propriété active au bouton
+    const btnActive =(btn)=>{
+      document.querySelectorAll(".filtres button").forEach(b => b.classList.remove('active'));
+      btn.classList.add("active");
+    }; 
     const filtres=document.querySelector(".filtres")
     const btnAll=document.createElement('button')
+
     btnAll.textContent="Tous";
     filtres.appendChild(btnAll)
     btnAll.addEventListener("click",()=>{
       afficherGallerie(works);
+      btnActive(btnAll);
     })
 
     //Creation des boutons(filtres)
@@ -59,6 +66,7 @@ async function loadGallery() {
     bouton.addEventListener("click",()=>{
     const projetsFiltres = works.filter(work => work.category.name === category);
     afficherGallerie(projetsFiltres)
+    btnActive(bouton);
       
     })
     })

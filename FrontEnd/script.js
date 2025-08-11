@@ -43,8 +43,6 @@ async function loadGallery() {
     console.log(categorieUnique);
 
     //Cible le conteneur html (filtres)
-    const btnModified=document.querySelector(".btnModified") 
-    btnModified.style.display="none"; //Supprime "modifier"
     const filtres=document.querySelector(".filtres")
     const btnAll=document.createElement('button')
     btnAll.textContent="Tous";

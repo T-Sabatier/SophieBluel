@@ -225,8 +225,8 @@ body{
 	background-color:#fffef8;
 }
 footer {
-	background-color:#ffffff; /* blanc pur */
-	width: 100%;
+	background-color:#ffffff;
+	
 }
 
 footer nav ul {
@@ -275,3 +275,14 @@ footer nav ul {
 	justify-content:center;
 	gap:20px;
 }
+.modeEdit{
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+	background-color: black;
+	color: whitesmoke ;
+	gap: 10px;
+}
+ html {
+	background-color: #fffff;
+ }

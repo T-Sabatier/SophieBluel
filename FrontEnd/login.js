@@ -29,7 +29,7 @@ method: "POST",
   })
   .catch(error => {
     const msgError=document.querySelector("#messageErreur");
-    msgError.innerText="Combinaison email/mot passe incorrect"
+    msgError.innerText="Erreur dans l’identifiant ou le mot de passe"
     console.log("erreur")
   })
 

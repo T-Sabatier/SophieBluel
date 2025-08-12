@@ -225,7 +225,7 @@ footer nav ul {
 	color:#fffef8
 }
 
-body{
+html{
 	background-color:#fffef8;
 }
 footer {
@@ -314,14 +314,14 @@ html {
 	display: block;
 }
 .modal{
+	
 	border-radius: 10px;
 	background-color: #ffffff;
 	position:absolute;
-	width:95%;
-	max-width: 500px;
+	max-width: 600px;
 	min-width: 300px;
 	padding: 30px;
-	top:40%;
+	top:95%;
 	left:50%;
 	transform: translate(-50%,-50%);
 		
@@ -352,3 +352,48 @@ html {
 
 }
 
+.modalGallery img{
+	width: 100%;
+	
+
+}
+.modalGallery{
+	display:flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	padding-bottom: 60px;
+	padding-top: 30px;
+	border-bottom: 2px solid gainsboro;
+	gap:20px;
+}
+.imageContainer{
+	width: 17.3%;
+	position: relative;
+}
+
+.imageContainer button{
+	position:absolute;
+	top: 5px;        
+    right: 5px;
+	color: #ffffff;
+	background-color: black;
+	border: none;
+	cursor: pointer;
+
+}
+
+.addbtn{
+	 display: flex;
+    border-radius: 60px;
+    border: 1px solid #1D6154;
+    font-size: 14px;
+    color: #ffffff;
+    padding: 12px 60px; 
+    background-color: #1D6154;
+    font-family: 'Syne';
+    margin: 40px 0 20px 0; /
+}
+.addprojet{
+	display: flex;
+	justify-content: center;
+}

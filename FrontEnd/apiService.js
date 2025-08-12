@@ -1,6 +1,6 @@
 //fonction pour se connecter
 async function loginUser(email, password) {
-    const response= await fetch ("http://localhost:5678/api/users/login",{
+    const response= await fetch ('http://localhost:5678/api/users/login',{
 method: "POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({email,password})
@@ -21,4 +21,20 @@ async function getWorks(){
     }
 
     return response.json();
+}
+
+//fonction de suppression de projets
+async function deleteWorks(workId){
+    const token = sessionStorage.getItem("token");
+
+    const response = await fetch(`http://localhost:5678/api/works/${workId}` , {
+        method : "DELETE",
+        headers :{
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    if (!response.ok){
+        throw new Error ("Erreur lors de la suppression");
+    }
+    return true;
 }

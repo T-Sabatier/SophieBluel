@@ -24,22 +24,18 @@ const gallery = document.querySelector('.gallery');
   //Fonction chargement gallerie
 async function loadGallery() {
   try {
-    const response = await fetch('http://localhost:5678/api/works');
+    const works = await getWorks();
 
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des projets');
-    }
-
-    const works = await response.json();
+    window.stockageWorks = works;
     gallery.innerHTML = '';
     // Gestion des filtres
     //Recuperation des categories
     const categorie= works.map(article=> article.category.name)
-    console.log(categorie)
+  
 
     //Suppression des doublons
     const categorieUnique= [... new Set (categorie)];
-    console.log(categorieUnique);
+    
 
     //Cible le conteneur html (filtres)
     // Ajout propriété active au bouton
@@ -86,4 +82,10 @@ function getToken(){
 token = localStorage.getItem("token");
 console.log(token)
 }*/
-
+const token = sessionStorage.getItem("token");
+  if (token) {
+    const script = document.createElement("script")
+    script.src="admin.js";
+    script.defer =true
+    document.head.appendChild(script);
+  }

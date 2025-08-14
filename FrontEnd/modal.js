@@ -9,6 +9,7 @@ function toggleModal (){
 
     if (modalContainer.classList.contains ("active")){
         loadModalGallery();
+        setupButtons()
     }
   
 }
@@ -76,4 +77,28 @@ function afficherModalGallery(works) {
         modalGallery.appendChild(deleteContainer);
         
     });
+}
+
+    
+// Modal ajout projet
+
+    function showGallery(){
+        document.querySelector('.modalRemove').style.display='block';
+        document.querySelector('.modalContentAdd').style.display='none';
+    }
+    function showAddForm(){
+        document.querySelector('.modalRemove').style.display='none';
+        document.querySelector('.modalContentAdd').style.display='block';
+    }
+
+    function setupButtons() {
+    const addBtn = document.querySelector('.addbtn');
+    const backBtn = document.querySelector('.btnBack');
+    
+    if (addBtn) {
+        addBtn.addEventListener('click', showAddForm);
+    }
+    if (backBtn) {
+        backBtn.addEventListener('click', showGallery);
+    }
 }

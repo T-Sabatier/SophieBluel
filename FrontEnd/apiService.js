@@ -1,7 +1,7 @@
 //fonction pour se connecter
 async function loginUser(email, password) {
     const response= await fetch ('http://localhost:5678/api/users/login',{
-method: "POST",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body:JSON.stringify({email,password})
 })
@@ -29,12 +29,30 @@ async function deleteWorks(workId){
 
     const response = await fetch(`http://localhost:5678/api/works/${workId}` , {
         method : "DELETE",
-        headers :{
-            "Authorization": `Bearer ${token}`
-        }
+        headers :{"Authorization": `Bearer ${token}`}
     })
     if (!response.ok){
         throw new Error ("Erreur lors de la suppression");
     }
     return true;
+}
+
+//fonction ajouter un projet
+async function addWork(title, imageFile,categoryId) {
+    const token = sessionStorage.getItem("token");
+
+    const infoProjet= new FormData();
+    infoProjet.append ("title",title);
+    infoProjet.append ("image",imageFile);
+    infoProjet.append("category", categoryId);
+
+    const response = await fetch('http://localhost:5678/api/works',{
+    method :"POST",
+    headers :{"Authorization": `Bearer ${token}`},
+    body : infoProjet
+})
+    if (!response.ok){
+        throw new Error ("Erreur lors de l'ajout ");
+    }
+    return response.json();
 }

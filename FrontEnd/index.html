@@ -24,13 +24,43 @@
 			<div class="modalOverlay trigger"></div>
 		<div class="modal">
 			<button class="modalClose trigger">x</button>
+			<div class= "modalRemove">
 			<h3>Galerie photo</h3>
 			<div class="modalGallery"></div>
 			<div class="addprojet">
 			<button class="addbtn">Ajouter une photo</button>
-		</div>	
+			</div>
+			</div>	
+
+		<div class ="modalContentAdd">
+			<button class="btnBack"><i class="fa-solid fa-arrow-left"></i></button>
+			<h3>Ajout photo</h3>
+			<form class="projetAdd">
+				<div class="allItemsContainer">
+				<div class="allItems">
+				<div class="photoContainer">
+					<i class="fa-solid fa-image"></i>
+					<label for="image" class="customInput">
+					+ Ajouter photo
+					</label>
+				<input type="file" id="image" name="image" required>
+				<p>jpg,png : 4mo max</p>
+				</div>
+			</div>
+				<label for="title">Titre</label>
+				<input type="text" id="title" name ="title" required>
+				<label for ="category">Categorie</label>
+				<select id="category" name="category" required>
+					<option value=""></option>
+				</select>
+				</div>
+				<div class="btnSubmit">
+				<button type="submit">Valider</button>
+				</div>
+			</form>
 		</div>
 		</div>
+	</div>
 	<div class="container">
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>

@@ -56,3 +56,13 @@ async function addWork(title, imageFile,categoryId) {
     }
     return response.json();
 }
+
+// Recuperer les categories
+async function getCategory(){
+    const response = await fetch ('http://localhost:5678/api/categories');
+
+    if (!response.ok){
+        throw new Error ("Erreur lors de la récupération");
+    }
+    return response.json();
+}

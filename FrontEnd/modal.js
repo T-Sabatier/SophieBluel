@@ -110,6 +110,9 @@ function showAddForm(){
     // Ajouter l'écouteur pour la prévisualisation d'image
     const fileInput = document.querySelector("#image");
     fileInput.addEventListener("change", previewImg);
+
+    const projetSubmit= document.querySelector(".projetAdd");
+    projetSubmit.addEventListener("submit",addForm);
 }
 
 // Configuration des boutons de navigation dans la modal
@@ -175,9 +178,19 @@ function previewImg(){
         createImg.src = imageUrl;                           // Lui donner l'URL de l'image
         createImg.className = "image-preview";              // Lui donner une classe CSS
         
+        createImg.addEventListener("click",function(){
+            fileInput.click();
+        })
         // Remplacer le contenu de la zone photo par l'aperçu
         const photoContainer = document.querySelector(".photoContainer");
-        photoContainer.innerHTML = "";                      // Vider la zone
+         const ancienneImage = photoContainer.querySelector('.image-preview');
+        if (ancienneImage) {
+            ancienneImage.remove();
+        }
+        document.querySelector('.fa-image').style.display = 'none';
+        document.querySelector('.customInput').style.display = 'none';
+        document.querySelector('#image').style.display = 'none';
+        document.querySelector('.fileInfo').style.display = 'none';                     
         photoContainer.appendChild(createImg);              // Ajouter l'aperçu
     };
     
@@ -217,5 +230,37 @@ function resetModalForm() {
     if (photoContainer && originalPhotoHTML) {
         // Restaurer le HTML sauvegardé (icône + texte + input)
         photoContainer.innerHTML = originalPhotoHTML;
+    }
+}
+
+const projetSubmit = document.querySelector(".projetAdd");
+projetSubmit.addEventListener("submit", addForm);
+
+async function addForm(event) {
+    event.preventDefault();
+
+    const img =document.querySelector("#image").files[0];
+    const title =document.querySelector("#title").value;
+    const category =document.querySelector("#category").value;
+
+    
+    if (!img || !title || !category) {
+        alert("Veuillez remplir tous les champs !");
+        return; 
+    }
+
+    try {
+        await addWork(title, img, category);
+        const form = event.target;
+        form.reset();
+         const photoContainer = document.querySelector('.photoContainer');
+    if (photoContainer && originalPhotoHTML) {
+        photoContainer.innerHTML = originalPhotoHTML;
+    }
+        alert("Projet ajouté avec succès !");
+        loadGallery();
+    } catch (error) {
+        console.error("Erreur lors de l'ajout:", error);
+        alert("Erreur lors de l'ajout du projet");
     }
 }

@@ -14,7 +14,7 @@ loginForm.addEventListener("submit", async function(event) {     // Écouter la 
         window.location.href = "index.html";                    // Rediriger vers la page d'accueil
         
     } catch (error) {
-        const msgError = document.querySelector("#messageErreur");         // Sélectionner l'élément d'affichage d'erreur
+        const msgError = document.querySelector("#msgErreur");         // Sélectionner l'élément d'affichage d'erreur
         msgError.innerText = "Erreur dans l'identifiant ou le mot de passe"; // Afficher message d'erreur à l'utilisateur
         console.log("erreur");                                  // Logger l'erreur en console
     }

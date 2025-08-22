@@ -113,8 +113,8 @@ async function loadCategories() {
     try {         
         const categories = await getCategory();           // Récupérer toutes les catégories depuis l'API
         
-        const selectCategorie = document.querySelector("#category");  // Trouver le menu déroulant des catégories et le vider
-        selectCategorie.innerHTML = "";  
+        const selectCategorie = document.querySelector("#category");  // Trouver le menu déroulant des catégories
+          
 
         categories.forEach(category => {                  // Pour chaque catégorie, créer une option dans le menu déroulant
             const option = document.createElement("option");

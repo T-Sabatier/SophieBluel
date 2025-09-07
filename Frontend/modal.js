@@ -118,7 +118,8 @@ async function loadCategories() {
         const categories = await getCategory();           // Récupérer toutes les catégories depuis l'API
         
         const selectCategorie = document.querySelector("#category");  // Trouver le menu déroulant des catégories
-           selectCategorie.innerHTML = '<option value="">Choisir une catégorie</option>'
+           
+            selectCategorie.innerHTML = '<option value="">Choisir une catégorie</option>'  // Vide le cache
 
         categories.forEach(category => {                  // Pour chaque catégorie, créer une option dans le menu déroulant
             const option = document.createElement("option");
@@ -256,6 +257,7 @@ async function addForm(event) {
     }
 }
 
+// Validation du formulaire par changement de couleur bouton valider
 function verifierChamps() {
     const image = document.querySelector("#image").files[0];
     const titre = document.querySelector("#title").value;

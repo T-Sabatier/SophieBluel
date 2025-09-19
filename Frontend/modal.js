@@ -142,6 +142,20 @@ function previewImg(){
         return;
     }
     
+    
+if (file.type !== 'image/png' && file.type !== 'image/jpeg' && file.type !== 'image/jpg') {
+    afficherMessage("Seuls les fichiers PNG, JPG et JPEG sont autorisés !", "erreur");
+    fileInput.value = "";
+    return;
+}
+
+
+if (file.size > 4 * 1024 * 1024) {
+    afficherMessage("Le fichier est trop volumineux ! Maximum 4Mo.", "erreur");
+    fileInput.value = "";
+    return;
+}
+    
     const reader = new FileReader();                    // Créer un FileReader pour lire le fichier
     
     reader.onload = function(event){                    // Définir ce qui se passe QUAND le fichier est lu

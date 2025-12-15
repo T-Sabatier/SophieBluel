@@ -49,7 +49,7 @@ async function addWork(title, imageFile, categoryId) {
     infoProjet.append("image", imageFile);
     infoProjet.append("category", categoryId);
 
-    const response = await fetch('http://localhost:5678/api/works', {
+    const response = await fetch('https://sophiebluel-api.onrender.com', {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` },
         body: infoProjet

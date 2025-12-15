@@ -1,20 +1,20 @@
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken';
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
 	try {
 		console.log(req.headers.authorization);
-		const token = req.headers.authorization.split(' ')[1]
-		const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET)
-		const userId = decodedToken.userId
-		req.auth = { userId }
+		const token = req.headers.authorization.split(' ')[1];
+		const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+		const userId = decodedToken.userId;
+		req.auth = { userId };
 		if (req.body.userId && req.body.userId !== userId) {
-			throw 'Invalid user ID'
+			throw 'Invalid user ID';
 		} else {
-			next()
+			next();
 		}
 	} catch {
 		res.status(401).json({
 			error: new Error('You are not authenticated')
-		})
+		});
 	}
-}
+};

@@ -1,20 +1,21 @@
-const db = require('./../models');
-const Categories = db.categories
+import db from '../models/index.js';
 
-exports.findAll = async (req, res) =>  {
-	try{
+const Categories = db.categories;
+
+export const findAll = async (req, res) => {
+	try {
 		const works = await Categories.findAll();
 		return res.status(200).json(works);
-	}catch(err){
-		return res.status(500).json({ error: new Error('Something went wrong')})
+	} catch (err) {
+		return res.status(500).json({ error: new Error('Something went wrong') });
 	}
+};
 
-}
-
-exports.create = async (req, res) => {
-
+export const create = async (req, res) => {
 	const category = await Categories.create({
-		name : req.body.name
-	})
-	return res.status(201).json(category)
-}
+		name: req.body.name
+	});
+	return res.status(201).json(category);
+};
+
+export default { findAll, create };

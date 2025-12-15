@@ -1,12 +1,13 @@
-const express = require('express');
+import express from 'express';
+import multer from '../middlewares/multer-config.js';
+import auth from '../middlewares/auth.js';
+import checkWork from '../middlewares/checkWork.js';
+import workCtrl from '../controllers/works.controller.js';
+
 const router = express.Router();
-const multer = require('../middlewares/multer-config');
-const auth = require('../middlewares/auth');
-const checkWork = require('../middlewares/checkWork');
-const workCtrl = require('../controllers/works.controller');
 
 router.post('/', auth, multer, checkWork, workCtrl.create);
 router.get('/', workCtrl.findAll);
 router.delete('/:id', auth, workCtrl.delete);
 
-module.exports = router;
+export default router;

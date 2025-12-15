@@ -1,18 +1,17 @@
-
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
 	const Works = sequelize.define(
 		"works",
 		{
-		title: {
-			type: DataTypes.STRING,
-			allowNull: false
+			title: {
+				type: DataTypes.STRING,
+				allowNull: false
 			},
-		imageUrl: {
-			type: DataTypes.STRING,
-			allowNull: false
+			imageUrl: {
+				type: DataTypes.STRING,
+				allowNull: false
 			}
 		},
-		{timestamps:false}
-	)
-	return Works
-}
+		{ timestamps: false }
+	);
+	return Works;
+};

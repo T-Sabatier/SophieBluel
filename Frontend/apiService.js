@@ -65,6 +65,7 @@ async function addWork(title, imageFile, categoryId) {
 }
 
 // Récupérer les catégories
+//Récuperer les catégories
 async function getCategory() {
     const response = await fetch(`${API_URL}/api/categories`);
 

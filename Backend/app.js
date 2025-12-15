@@ -1,57 +1,70 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors')
-require('dotenv').config();
-const helmet = require('helmet');
-const swaggerUi = require('swagger-ui-express')
-const yaml = require('yamljs')
-const swaggerDocs = yaml.load('swagger.yaml')
-const app = express()
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import helmet from 'helmet';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs';
+import bcrypt from 'bcrypt';
+import db from './models/index.js';
+import userRoutes from './routes/user.routes.js';
+import categoriesRoutes from './routes/categories.routes.js';
+import worksRoutes from './routes/works.routes.js';
+
+// Pour obtenir __dirname en ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
+
+const swaggerDocs = yaml.load('swagger.yaml');
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(helmet({
-      crossOriginResourcePolicy: false,
-    }));
-app.use('/images', express.static(path.join(__dirname, 'images')))
+  crossOriginResourcePolicy: false,
+}));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
-const db = require("./models");
-const userRoutes = require('./routes/user.routes');
-const categoriesRoutes = require('./routes/categories.routes');
-const worksRoutes = require('./routes/works.routes');
-const bcrypt = require("bcrypt");
+// Initialisation de la base de données
+await db.sequelize.sync();
+console.log("db is ready");
 
-db.sequelize.sync().then(async () => {
-  console.log("db is ready");
+// ===== CRÉATION ADMIN =====
+const email = "admin@test.com";
+const password = "admin1234";
 
-  const email = "admin@test.com";
-  const password = "admin1234";
+const exists = await db.users.findOne({ where: { email } });
+if (!exists) {
+  const hash = await bcrypt.hash(password, 10);
+  await db.users.create({
+    email,
+    password: hash
+  });
+  console.log("Admin créé :", email, password);
+}
 
-  // selon ton export Sequelize : users ou user
-  const User = db.users || db.user;
-
-  const exists = await User.findOne({ where: { email } });
-  if (!exists) {
-    const hash = await bcrypt.hash(password, 10);
-    await User.create({ email, password: hash });
-    console.log("Admin créé :", email, password);
-  }
-});
+// ===== CORRECTION DES imageUrl (localhost) =====
 const works = await db.works.findAll();
-for (const w of works) {
-  if (w.imageUrl?.includes("http://localhost:5678")) {
-    w.imageUrl = w.imageUrl.replace(
+const renderUrl = process.env.RENDER_EXTERNAL_URL || "https://sophiebluel-api.onrender.com";
+
+for (const work of works) {
+  if (work.imageUrl?.includes("http://localhost:5678")) {
+    work.imageUrl = work.imageUrl.replace(
       "http://localhost:5678",
-      "https://sophiebluel-api.onrender.com"
+      renderUrl
     );
-    await w.save();
+    await work.save();
   }
 }
-console.log("imageUrl corrigées");
-
+console.log("ImageUrl corrigées");
 
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/works', worksRoutes);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-module.exports = app;
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+export default app;

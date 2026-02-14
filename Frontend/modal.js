@@ -143,7 +143,7 @@ function previewImg(){
     }
     
     
-if (file.type !== 'image/png' && file.type !== 'image/jpeg' && file.type !== 'image/jpg') {
+if (file.type !== 'image/png' && file.type !== 'image/jpeg' && file.type !== 'image/jpg' && file.type !== 'image.webp') {
     afficherMessage("Seuls les fichiers PNG, JPG et JPEG sont autorisés !", "erreur");
     fileInput.value = "";
     return;
